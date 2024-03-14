@@ -31,6 +31,9 @@ public class Restaurant {
     @Column(nullable = false)
     private String description;
 
+    @Column(name="img_path", nullable = true)
+    private String imagePath;
+
     @ManyToMany
     @JoinTable(
         name = "restaurant_cuisines",
@@ -89,6 +92,14 @@ public class Restaurant {
 
     public void setProducts(Set<Product> products) {
         this.products = products;
+    }
+
+    public String getImagePath() {
+        return this.imagePath;
+    }
+
+    public void setImagePath(String path) {
+        this.imagePath = path;
     }
 
 }
