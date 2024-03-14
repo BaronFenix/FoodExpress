@@ -1,5 +1,7 @@
 package com.example.FoodExpress.models;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,9 +13,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+@Component
 @Entity
 @Table(name = "Users")
-public class User {
+public class User  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +25,7 @@ public class User {
     @Column(nullable = false, length = 30, unique = true)
     private String login;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 60)
     private String password;
 
     @Column(name = "first_name", nullable = false, length = 30)
@@ -74,11 +77,11 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getLastname() {
+    public String getLastName() {
         return this.Lastname;
     }
 
-    public void setLastname(String Lastname) {
+    public void setLastName(String Lastname) {
         this.Lastname = Lastname;
     }
 
