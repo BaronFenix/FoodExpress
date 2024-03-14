@@ -25,6 +25,17 @@ public class Role {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
     private Set<User> users;
 
+
+    public Role() {}
+
+    public Role(String name) {
+        this.name = name;
+    }
+    public Role(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Long getId() {
         return this.id;
     }
@@ -48,7 +59,6 @@ public class Role {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-    
     
 
 }
