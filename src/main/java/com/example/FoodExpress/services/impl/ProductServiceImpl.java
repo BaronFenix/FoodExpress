@@ -3,6 +3,7 @@ package com.example.FoodExpress.services.impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.FoodExpress.models.Category;
 import com.example.FoodExpress.models.Product;
@@ -10,6 +11,7 @@ import com.example.FoodExpress.repositories.CategoryRepository;
 import com.example.FoodExpress.repositories.ProductRepository;
 import com.example.FoodExpress.services.ProductService;
 
+@Service
 public class ProductServiceImpl implements ProductService  {
 
     @Autowired
@@ -41,7 +43,7 @@ public class ProductServiceImpl implements ProductService  {
 
     @Override
     public Optional<Product> getProductByName(String name) {
-        return productRepository.findByName(name);
+        return Optional.of(productRepository.findByName(name));
     }
 
     @Override
@@ -76,7 +78,7 @@ public class ProductServiceImpl implements ProductService  {
 
     @Override
     public Optional<Category> getCategoryByName(String name) {
-        return categoryRepository.findByName(name);
+        return Optional.of(categoryRepository.findByName(name));
     }
 
     @Override

@@ -1,8 +1,10 @@
 package com.example.FoodExpress.services.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.FoodExpress.models.Role;
 import com.example.FoodExpress.models.User;
@@ -10,7 +12,8 @@ import com.example.FoodExpress.repositories.RoleRepository;
 import com.example.FoodExpress.repositories.UserRepository;
 import com.example.FoodExpress.services.UserService;
 
-public class UserServiceImpl implements UserService {
+@Service
+public class UserServiceImpl implements UserService  {
     
     @Autowired  
     private UserRepository userRepository;
@@ -21,6 +24,11 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public User addUser(User user) {
+        User userFromDB = userRepository.findByLogin(user.getLogin());
+        if (userFromDB != null) {
+            return null;
+        }
+        user.setRole(new Role("ROLE_USER"));
         User savedUser = userRepository.save(user);
 
         return savedUser;
@@ -43,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getUserByLogin(String login) {
-        return userRepository.findByLogin(login);
+        return Optional.of(userRepository.findByLogin(login));
     }
 
     @Override
@@ -57,7 +65,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Iterable<User> getUsersByRole(String roleName) {
+    public List<User> getUsersByRole(String roleName) {
         return userRepository.findByRole(roleName);
     }
 
