@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layouts/main_layout.html}">
+    <head> 
+        <title>Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link th:href="@{css/style.css}" rel="stylesheet" media="screen" />
+    </head>
+    <body>
+        <div class="" layout:fragment="main_layout">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active" data-bs-interval="1000">
+                    <img class="d-block w-100" src="images/promo/promo3.jpg" alt="First slide">
+                    <div class="carousel-caption carousel-caption-top d-none d-md-block">
+                      <h5 class="display-6">Огромный выбор ресторанов быстрого питания</h5>
+                      <p class="fs-5 fw-light">Заказывайте все что душе угодно</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="images/promo/promo2.jpg" alt="Second slide">
+                    <div class="carousel-caption carousel-caption-top d-none d-md-block">
+                      <h5 class="display-6">Огромный выбор ресторанов быстрого питания</h5>
+                      <p class="fs-5 fw-light">Заказывайте все что душе угодно</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="images/promo/promo1.jpg" alt="Third slide">
+                    <div class="carousel-caption carousel-caption-top d-none d-md-block">
+                      <h5 class="display-6">Работайте вместе с нами!</h5>
+                      <p class="fs-5 fw-light">Подробнее читайте в нашей статье</p>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+              </div>
+
+              <div class="container">
+              <h3 class="mx-5 fs-3 my-5">Рестораны</h3>
+
+              <div class="content-block">
+                <div th:each= "cafe: ${restaurantsList}" class="cafe-card col-md-3 col-sm-10">
+                    <div class="cafe-card-img-container">
+                      <img th:src="${cafe.imagePath}" class="" alt="img">
+                    </div>
+                  <div class="cafe-card-title my-4">
+                    <a class="link link-cyan" th:href="@{'/restaurant/' + ${cafe.name}}"><h5 th:text="${cafe.name}"></h5></a>
+                  </div>
+                </div>
+             </div>
+              
+               
+              
+
+            </div>
+            
+        </div>
+    </body>
+</html>
+
+
+<script>
+
+//   // Activate Carousel
+//   $(".carousel").carousel();
+    
+//   // Enable Carousel Indicators
+//   $(".item1").click(function(){
+//     $(".carousel").carousel(0);
+//   });
+//   $(".item2").click(function(){
+//     $(".carousel").carousel(1);
+//   });
+//   $(".item3").click(function(){
+//     $(".carousel").carousel(2);
+//   });
+    
+//   // Enable Carousel Controls
+//   $(".left").click(function(){
+//     $(".carousel").carousel("prev");
+//   });
+//   $(".right").click(function(){
+//     $(".carousel").carousel("next");
+//   });
+
+
+</script>

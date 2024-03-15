@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layouts/main_layout.html}">
+    <head> 
+        <title>Profile</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link th:href="@{/css/style.css}" rel="stylesheet" media="screen" />
+    </head>
+    <body>
+        <div class="container" layout:fragment="main_layout">
+
+        
+            
+            <form th:action="@{'/user/profile/' + ${authUser.login}}" method="post" th:object="${authUser}" class="needs-validation col-md-4 mx-auto" novalidate>
+                <p th:text="'Профиль:  ' + ${authUser.login}" class="fs-3"></p>
+                <div class="bg-main rounded text-light px-5">
+
+                <div class="col-md-12 my-5">
+                    <label for="validationLogin" class="form-label my-2">Логин</label>
+                    <input type="text" name="login" id="validationLogin" th:field="*{login}" value="${authUser.login}" minlength="3" class="form-control" required>
+                    <div class="invalid-feedback">
+                      Введите логин не менее 3 символов!
+                    </div>
+                    <label for="validationName" class="form-label my-2">Имя</label>
+                    <input type="text" name="first_name" id="validationName" th:field="*{firstName}" minlength="2" value="${authUser.firstName}" class="form-control" required>
+                    <div class="invalid-feedback">
+                      Введите имя!
+                    </div>
+                    <label for="validationSurname" class="form-label my-2">Фамилия</label>
+                    <input type="text" name="first_surname" id="validationSurname" th:field="*{lastName}" minlength="2" value="${authUser.lastName}" class="form-control" required>
+                    <div class="invalid-feedback">
+                      Введите фамилию!
+                    </div>
+                    <label for="validationSurname" class="form-label my-2">Адресс</label>
+                    <input type="text" name="address" id="validationAddress" th:field="*{address}" minlength="3" value="${authUser.address}" class="form-control" required>
+                    <div class="invalid-feedback">
+                      Введите адресс!
+                    </div>
+                    <label for="validationSurname" class="form-label my-2">Номер телефона</label>
+                    <input type="tel" name="phone" id="validationPhone" th:field="*{phone}" minlength="6" pattern="+7[0-9]{3}" value="${authUser.phone}" class="form-control" required>
+                    <div class="invalid-feedback">
+                      Введите номер телефона!
+                    </div>                      
+                    <div class="d-grid gap-2">
+                      <button type="submit" class="btn btn-custom my-4">Сохранить изменения</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+
+        </div>
+    </body>
+</html>

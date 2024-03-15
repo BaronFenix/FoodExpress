@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layouts/main_layout.html}">
+    <head> 
+        <title>Sign-Out</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link th:href="@{css/style.css}" rel="stylesheet" media="screen" />
+    </head>
+    <body>
+        <div class="container long_content" layout:fragment="main_layout">
+            <div class="d-flex justify-content-center my-5">
+                <form th:action="@{/sign-out}" method="post">
+                    <h5 class="display-5">Вы действительно хотите выйти?</h5>
+                    <div class="d-flex justify-content-center my-5">
+                        <button type="submit" class="btn btn-warning mx-4">Выйти</button>
+                        <a th:href="@{/}" class="btn btn-outline-warning">Вернуться</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

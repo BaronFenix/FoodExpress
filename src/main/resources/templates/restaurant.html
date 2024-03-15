@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layouts/main_layout.html}">
+    <head> 
+        <title th:text="${restaurant.name}"></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link th:href="@{/css/style.css}" rel="stylesheet" media="screen" />
+    </head>
+    <body>
+        <div class="long_content container" layout:fragment="main_layout">
+
+        
+            <h1 th:text="${restaurant.name}" class="display-1"></h1>
+
+
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layouts/main_layout.html}">
+    <head> 
+        <title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link th:href="@{css/style.css}" rel="stylesheet" media="screen" />
+    </head>
+    <body>
+        <div class="container long_content" layout:fragment="main_layout">
+            <div class="d-flex justify-content-center my-5">
+                <form th:action="@{/login}" method="post" th:object="${user}" class="needs-validation" novalidate>
+                    <input type="text" id="login" name="login" placeholder="Enter Login" th:field="*{login}" class="form-control my-2" required>
+                    <div class="invalid-feedback">
+                        Введите логин!
+                      </div>
+                    <input type="password" name="password" placeholder="Enter password" th:field="*{password}" class="form-control my-2" required>
+                    <div class="invalid-feedback">
+                        Введите пароль!
+                      </div>
+                    <div class="d-grid gap-2">
+                      <p class="text-danger" th:text="${loginErrorMsg}"></p>
+                      <button type="submit" class="btn btn-warning">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
+<script>
+    (function () {
+      'use strict'
+      var forms = document.querySelectorAll('.needs-validation')
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+    
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+    </script>

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layouts/main_layout.html}">
+    <head> 
+        <title>Sign Up</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link th:href="@{css/style.css}" rel="stylesheet" media="screen" />
+    </head>
+    <body>
+        <div class="container" layout:fragment="main_layout">
+            <div class="d-flex justify-content-center my-5 col-md-12">
+                <form th:action="@{/register}" method="post" th:object="${userForm}" class="needs-validation col-md-4" novalidate>
+
+                    <div class="col-md-12 my-5">
+                        <label for="validationLogin" class="form-label my-2">Логин</label>
+                        <input type="text" name="login" id="validationLogin" th:field="*{login}" placeholder="Enter Login" minlength="3" class="form-control" required>
+                        <div class="invalid-feedback">
+                          Введите логин не менее 3 символов!
+                        </div>
+                        <label for="validationPassword" class="form-label my-2">Пароль</label>
+                        <input type="password" name="password" id="validationPassword" th:field="*{password}" minlength="5" placeholder="Enter Password" class="form-control" required>
+                        <div class="invalid-feedback">
+                          Введите пароль не менее 5 символво!
+                        </div>
+                        <label for="validationName" class="form-label my-2">Имя</label>
+                        <input type="text" name="first_name" id="validationName" th:field="*{firstName}" minlength="2" placeholder="Enter Name" class="form-control" required>
+                        <div class="invalid-feedback">
+                          Введите имя!
+                        </div>
+                        <label for="validationSurname" class="form-label my-2">Фамилия</label>
+                        <input type="text" name="first_surname" id="validationSurname" th:field="*{lastName}" minlength="2" placeholder="Enter Surname" class="form-control" required>
+                        <div class="invalid-feedback">
+                          Введите фамилию!
+                        </div>
+                        <label for="validationSurname" class="form-label my-2">Адресс</label>
+                        <input type="text" name="address" id="validationAddress" th:field="*{address}" minlength="3" placeholder="Enter Address" class="form-control" required>
+                        <div class="invalid-feedback">
+                          Введите адресс!
+                        </div>
+                        <label for="validationSurname" class="form-label my-2">Номер телефона</label>
+                        <input type="tel" name="phone" id="validationPhone" th:field="*{phone}" minlength="6" pattern="+7[0-9]{3}" placeholder="Enter phone (+7 777 777 77 77)" class="form-control" required>
+                        <div class="invalid-feedback">
+                          Введите номер телефона!
+                        </div>                      
+                        <div class="d-grid gap-2">
+                          <button type="submit" class="btn btn-warning my-4">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
+<script>
+(function () {
+  'use strict'
+  var forms = document.querySelectorAll('.needs-validation')
+
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
