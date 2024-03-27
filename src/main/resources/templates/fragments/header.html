@@ -1,10 +1,80 @@
-<header th:fragment="nav_bar" class="p-3 bg-main">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+<header th:fragment="nav_bar" class="p-2 bg-main position-sticky top-0 z-2000">
+    
+  <nav class="navbar navbar-expand-md">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" th:href="@{/}">FoodExpress</a>
+      <button class="navbar-toggler bg-orange" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-md-flex">  
+          <li class="nav-item"><a th:href="@{#}" class="nav-link fw-semibold px-2 text-white-hover-orange">Рестораны</a></li>
+          <li class="nav-item"><a th:href="@{#}" class="nav-link fw-semibold px-2 text-white-hover-orange">О Нас</a></li>
+        </ul>
+
+        <!-- Search Panel -->
+        <form class="d-flex col-lg-4 mx-lg-4">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-border-orange text-white mx-3" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search mb-1" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+            </svg>
+          </button>
+        </form>
+
+        <!-- Default Sign-in/Sign-out -->
+        <div th:if= "${authUser == null}" class="my-4 my-lg-0">
+          <a th:href="@{/login}"><button type="button" class="btn btn-custom me-2">Войти</button></a>
+          <a th:href="@{/register}"><button type="button" class="btn d-md-none d-lg-inline-block btn-outline-orange">Зарегистрироваться</button></a>
+        </div>
+
+        <!-- User Dropdown Menu -->
+        <div class="d-flex justify-content-evenly col-xs-10 col-md-2 ml-3 mt-3 mt-md-0">
+          <div th:if="${authUser != null}" class="dropdown">
+            <a class="d-block link-light text-decoration-none dropdown-toggle icon-link-hover icon-hover-effect" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+              </svg>
+            </a>
+
+            <div th:switch="${authUser.getRoleName}">
+              <!-- Drop Menu for User  -->
+              <ul th:case="'ROLE_USER'" class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                <li><a class="dropdown-item" th:href="@{'/user/' + ${authUser.login} + '/profile'}">Профиль</a></li>
+                <li><a class="dropdown-item" th:href="@{'/user/' + ${authUser.login} + '/orders'}">Мои заказы</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" th:href="@{/user/sign-out}">Выйти</a></li>
+              </ul>
+              <!-- Drop Menu for Admin  -->
+              <ul th:case="'ROLE_ADMIN'" class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                <li><a class="dropdown-item" th:href="@{'/user/' + ${authUser.login} + '/profile' + }">Профиль</a></li>
+                <li><a class="dropdown-item" href="#">Модерация</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" th:href="@{/user/sign-out}">Выйти</a></li>
+              </ul>
+            </div>
+          </div>
+        
+          <!-- Basket Btn -->
+          <div>
+            <a th:href="@{/basket}" class="text-orange icon-link-hover icon-hover-effect">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-basket3-fill mb-1" viewBox="0 0 16 16">
+              <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.468 15.426.943 9h14.114l-1.525 6.426a.75.75 0 0 1-.729.574H3.197a.75.75 0 0 1-.73-.574z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
       <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-        <!-- logo -->
+        logo
       </a>
 
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 position-sticky">
         <li><a th:href="@{/}" class="nav-link px-2 text-white">FoodExpress</a></li>
         <li><a th:href="@{#}" class="nav-link px-2 text-white">Рестораны</a></li>
         <li><a th:href="@{#}" class="nav-link px-2 text-white">Категории</a></li>
@@ -15,12 +85,12 @@
         <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
       </form>
 
-      <div th:if= "${authUser.role == null}">
+      <div th:if= "${authUser == null}">
         <a th:href="@{/login}"><button type="button" class="btn btn-custom me-2">Войти</button></a>
         <a th:href="@{/register}"><button type="button" class="btn btn-outline-light">Зарегистрироваться</button></a>
       </div>
 
-      <div th:if="${authUser.role != null}" th:switch="${authUser.role.name}">
+      <div th:switch="${authUser.getRoleName}" th:unless= "${authUser == null}">
         <div th:case="'ROLE_ADMIN'" class="dropdown text-end">
           <a class="d-block link-light text-decoration-none dropdown-toggle icon-link-hover icon-hover-effect" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -32,7 +102,7 @@
             <li><a class="dropdown-item" th:href="@{'/user/profile/' + ${authUser.login}}">Профиль</a></li>
             <li><a class="dropdown-item" href="#">Модерация</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" th:href="@{/sign-out}">Выйти</a></li>
+            <li><a class="dropdown-item" th:href="@{/user/sign-out}">Выйти</a></li>
           </ul>
         </div>
         
@@ -47,16 +117,16 @@
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
             <li><a class="dropdown-item" th:href="@{'/user/profile/' + ${authUser.login}}">Профиль</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" th:href="@{/sign-out}">Выйти</a></li>
+            <li><a class="dropdown-item" th:href="@{/user/sign-out}">Выйти</a></li>
           </ul>
         </div>
       </div>
 
-      <a th:href="${authUser.role == null} ? @{/login} : @{/basket}" class="text-custom mx-4 icon-link-hover icon-hover-effect">
+      <a th:href="@{/basket}" class="text-custom mx-4 icon-link-hover icon-hover-effect">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-basket3-fill mb-1" viewBox="0 0 16 16">
         <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.468 15.426.943 9h14.114l-1.525 6.426a.75.75 0 0 1-.729.574H3.197a.75.75 0 0 1-.73-.574z"></path>
         </svg>
       </a>
-    </div>
+    </div> -->
   </header>
 
