@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.example.FoodExpress.models.Role;
 import com.example.FoodExpress.models.User;
 
+
 public interface UserService {
 
     public User addUser(User user);
@@ -32,5 +33,7 @@ public interface UserService {
     public void removeRole(Role role);
 
     public void removeRoleById(Long id);
+
+    public Optional<Role> findRoleByName(String name);
     
 }

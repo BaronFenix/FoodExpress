@@ -1,5 +1,6 @@
 package com.example.FoodExpress.services.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,11 @@ public class ProductServiceImpl implements ProductService  {
     }
 
     @Override
+    public List<Product> getProductsByRestaurant(String name) {
+        return productRepository.findByRestaurantName(name);
+    }
+
+    @Override
     public Category addCategory(Category category) {
         return categoryRepository.save(category);
     }
@@ -84,6 +90,11 @@ public class ProductServiceImpl implements ProductService  {
     @Override
     public Optional<Category> getCategoryById(Long id) {
         return categoryRepository.findById(id);
+    }
+
+    @Override
+    public List<Category> getCategoriesByRestaurant(String name) {
+        return categoryRepository.findCategoriesByRestaurant(name);
     }
     
 }

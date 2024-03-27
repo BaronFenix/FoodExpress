@@ -1,5 +1,6 @@
 package com.example.FoodExpress.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.example.FoodExpress.models.Category;
@@ -21,6 +22,7 @@ public interface ProductService {
 
     public Iterable<Product> getAllProducts();
 
+    public List<Product> getProductsByRestaurant(String name);
 
     public Category addCategory(Category category);
     
@@ -33,5 +35,7 @@ public interface ProductService {
     public Optional<Category> getCategoryByName(String name);
 
     public Optional<Category> getCategoryById(Long id);
+
+    public List<Category> getCategoriesByRestaurant(String name);
 
 }
