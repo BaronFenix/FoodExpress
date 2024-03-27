@@ -28,10 +28,10 @@ public class UserServiceImpl implements UserService  {
         if (userFromDB != null) {
             return null;
         }
-        user.setRole(new Role("ROLE_USER"));
-        User savedUser = userRepository.save(user);
+        Role UserRole = roleRepository.findRoleByName("ROLE_USER");
+        user.setRole(UserRole);
 
-        return savedUser;
+        return userRepository.save(user);
     }
 
     @Override
@@ -88,6 +88,19 @@ public class UserServiceImpl implements UserService  {
     @Override
     public void removeRoleById(Long id) {
         roleRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Role> findRoleByName(String name) {
+        return Optional.of(roleRepository.findRoleByName(name));
+    }
+
+    public User validateUser(User user) {
+        User userFromDb = userRepository.findByLogin(user.getLogin());
+        if (user.getLogin().equals(userFromDb.getLogin()) && user.getPassword().equals(userFromDb.getPassword())) {
+            return userFromDb;
+        }
+        return null;
     }
 
 }
