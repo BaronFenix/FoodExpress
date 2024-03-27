@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layouts/main_layout.html}">
+    <head> 
+        <title>Create Order</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link th:href="@{/css/style.css}" rel="stylesheet" media="screen" />
+    </head>
+    <body>
+        <div class="container" layout:fragment="main_layout">
+            <div class="d-flex justify-content-center my-5 col-md-12">
+                <form th:action="@{/order/create}" method="post" th:object="${authUser}" class="needs-validation col-md-4 mx-auto" novalidate>
+                    <div class="bg-main rounded text-light px-5 py-2">
+    
+                    <div class="col-md-12 my-5">
+                        <label for="validationName" class="form-label my-2">Имя</label>
+                        <input type="text" name="first_name" id="validationName" th:field="*{firstName}" minlength="2" value="${authUser.firstName}" class="form-control" required>
+                        <div class="invalid-feedback">
+                          Введите имя!
+                        </div>
+                        <label for="validationSurname" class="form-label my-2">Адресс</label>
+                        <input type="text" name="address" id="validationAddress" th:field="*{address}" minlength="3" value="${authUser.address}" class="form-control" required>
+                        <div class="invalid-feedback">
+                          Введите адресс!
+                        </div>
+                        <label for="validationSurname" class="form-label my-2">Номер телефона</label>
+                        <input type="tel" name="phone" id="validationPhone" th:field="*{phone}" minlength="6" pattern="+7[0-9]{3}" value="${authUser.phone}" class="form-control" required>
+                        <div class="invalid-feedback">
+                          Введите номер телефона!
+                        </div>                      
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-inverse-orange  my-4">
+                                <span th:text="${'Заказать'}" class="mb-2"></span>
+                                <span th:text="${total_sum} + '₸'" class="ml-2"></span>
+                            </button>
+                          </div>
+                    </div>
+                </div>
+                </form>                      
+
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
+<script>
+(function () {
+  'use strict'
+  var forms = document.querySelectorAll('.needs-validation')
+
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>

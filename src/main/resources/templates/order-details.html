@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layouts/main_layout.html}">
+    <head> 
+        <title>Order Details</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link th:href="@{/css/style.css}" rel="stylesheet" media="screen" />
+    </head>
+    <body>
+        <div class="container" layout:fragment="main_layout">
+            <div class="col-10 mx-auto">
+                <h1 class="fs-4 my-4 mx-5">Детали заказа</h1>
+                <hr class="bg-dark border-2 border-top border-dark" />
+            </div>
+            
+            <div th:each= "order: ${orders}" class="col-10 mx-auto my-5">
+                <div th:if= "${order.id == orderId}">
+                    <a th:href="@{'/user/' + ${authUser.login} + '/orders'}" class="link text-orange">Вернуться к истории</a>
+                    <div class="d-flex mt-3">
+                        <strong th:text="'Номер заказа #'"></strong>
+                        <p th:text=" ${order.id}"></p>
+                    </div>
+                    <div class="d-flex">
+                        <strong th:text="'Дата заказа: '"></strong>
+                        <p th:text=" ${order.orderDateString}"></p>
+                    </div>
+
+                    <ul th:each= "orderProduct :${order.products}" class="list-group">
+                        <li class="list-group-item d-flex justify-content-around py-3">
+                            <img th:src="@{'../../../../' + ${orderProduct.product.imagePath}}" width="100" height="100" alt="img">
+
+
+                            <div class="d-flex">
+                                <strong th:text="'Товар:&nbsp;'"></strong>
+                                <p th:text="${orderProduct.product.name}"></p>
+                            </div>
+                            <div class="d-flex">
+                                <strong th:text="'Кол-во:&nbsp;'"></strong>
+                                <p th:text="${orderProduct.quantity}"></p>
+                            </div>
+                            <div class="d-flex">
+                                <strong th:text="'Цена за единицу:&nbsp;'"></strong>
+                                <p th:text="${orderProduct.product.price} + '₸'"></p>
+                            </div>
+                            <div class="d-flex">
+                                <strong th:text="'Сумма:&nbsp;'"></strong>
+                                <p th:text="${orderProduct.product.price * orderProduct.quantity} + '₸'"></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </body>
+</html>

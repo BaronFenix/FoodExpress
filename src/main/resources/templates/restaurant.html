@@ -5,14 +5,87 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link th:href="@{/css/style.css}" rel="stylesheet" media="screen" />
     </head>
-    <body>
-        <div class="long_content container" layout:fragment="main_layout">
+    <body style="height: auto;">
+        <div class="" layout:fragment="main_layout">
+          <!-- Restaurant Header -->
+          <div class="card text-white">
+            <img th:src="'../' + ${restaurant.headerImagePath}" class="card-img header-img" alt="bg">
+            <div class="card-img-overlay">
+              <h1 th:text="${restaurant.name}" class="card-title fw-bold"></h1>
+              <p th:text="${restaurant.description}" class="card-text col-md-4" ></p>
+            </div>
+          </div>
 
-        
-            <h1 th:text="${restaurant.name}" class="display-1"></h1>
+          <!-- Content -->
+          <div class="d-flex flex-row justify-space-between">
+          <!-- Side Menu -->
+            <aside class="d-none d-md-flex flex-column align-items-stretch sidenav col-2">
+              <h3 class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none">
+                <span class="fs-5 fw-bold">Категории</span>
+              </h3>
+              
+              <div class="list-group list-group-flush border-bottom scrollarea">
+                <div th:each= "category: ${categoriesList}">
+                    <a th:href="'#' + ${category.name}" class="list-group-item bg-white py-3">
+                        <strong th:text="${category.name}" class="mb-1 text-main"></strong>
+                    </a>
+                  </div>
+                </div>
+            </aside>
+
+            <!-- Restaurant Menu -->
+            <div class="container-fluid d-flex flex-column d-md-block">
+              <div th:each= "entrySet: ${productsMapByCategory}" class="col-10">
+                <!-- Product Header -->
+                <h2 th:text="${entrySet.getKey()}" th:id= "${entrySet.getKey()}" class="fw-bold py-2 my-3"></h2>
+                <hr class="bg-dark border-2 border-top border-dark" />
+
+                <!-- Product Card -->
+                <div th:each= "product: ${entrySet.getValue()}" th:id="${product.id}" class="product-card col-xs-10 d-md-flex flex-row"> 
+                <div class="product-card-img-container d-flex justify-content-center">
+                    <img th:src="@{'../' + ${product.imagePath}}" class="" alt="img">
+                  </div>
+                <div class="product-card-title col-md-6 my-4 px-4">
+                  <h5 th:text="${product.name}"></h5>
+                  <p th:text="${product.description}"></p>
+                </div>
+
+                <!-- Dinamic Buttons -->
+                <!-- Default btn -->
+                <div class="d-flex flex-column justify-content-center align-items-md-center my-5">
+
+                  <form th:action="'/restaurant/' + ${restaurant.name} + '#' + ${product.id}" method="post">
+                    <input type="hidden" name="selectedProductId" th:value="${product.id}">
+                    <!-- Default Button -->
+                    <div th:if="${basket == null || !basket.containsKey(product.id)}">
+                        <p th:text="${product.price} + '₸'" class="fs-5 fw-semibold px-3"></p>
+                      <input type="hidden" name="productQuantity" value="1">
+                      <button type="submit" class="btn btn-orange-classic mx-2">Добавить</button>
+                    </div>
+                    <!-- Adding Buttons -->
+                    <div th:if="${basket != null && basket.containsKey(product.id)}">
+                      <p th:text="${product.price * basket.get(product.id).quantity} + '₸'" class="fs-5 fw-semibold px-3"></p>
+                      <div class="number">
+                        <button class="btn fw-bold btn-orange-classic" type="button" onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.onchange();">-</button>
+                        <input type="number" name="productQuantity" min="1" max="99" th:value="${basket.get(product.id).getQuantity()}" readonly>
+                        <button class="btn fw-bold btn-orange-classic" type="button" onclick="this.previousElementSibling.stepUp(); this.previousElementSibling.onchange();">+</button>
+                        <button type="submit" class="btn btn-orange-classic mx-4">Добавить</button>
+                      </div>
+                    </div>
+                  </form>
+
+                </div>
+
+                </div>
+              </div>  
+            </div>
 
 
-
+          </div>
+                 
+                
+  
+              
         </div>
     </body>
 </html>

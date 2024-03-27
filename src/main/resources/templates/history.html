@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{layouts/main_layout.html}">
+    <head> 
+        <title>My Orders</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link th:href="@{/css/style.css}" rel="stylesheet" media="screen" />
+    </head>
+    <body>
+        <div class="container" layout:fragment="main_layout">
+            <div class="col-10 mx-auto">
+                <h1 class="fs-4 my-4 mx-5">История заказов</h1>
+                <hr class="bg-dark border-2 border-top border-dark" />
+            </div>
+            
+            <div th:each= "order: ${orders}" class="col-10 mx-auto my-5">
+
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-around py-3">
+                        <div class="d-flex">
+                            <strong th:text="'Заказ #'"></strong>
+                            <p th:text=" ${order.id}"></p>
+                        </div>
+                        <div class="d-flex">
+                            <strong th:text="'Дата заказа:&nbsp;'"></strong>
+                            <p th:text="${order.OrderDateString}"></p>
+                        </div>
+                        <div class="d-flex">
+                            <strong th:text="'Статус:&nbsp;'"></strong>
+                            <p th:text="${order.status.name}"></p>
+                        </div>
+                        <div class="d-flex">
+                            <strong th:text="'Общая сумма:&nbsp;'"></strong>
+                            <p th:text="${order.totalSum} + '₸'"></p>
+                        </div>
+                        <div class="d-flex">
+                            <a th:href="'/user/' + ${authUser.login} + '/order/'+ ${order.id} +'/details'" class="btn btn-outline-border-orange"><span>Детали</span></a>
+                        </div>
+                    </li>
+                  </ul>
+            </div>
+
+        </div>
+    </body>
+</html>

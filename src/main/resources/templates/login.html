@@ -6,10 +6,10 @@
         <link th:href="@{css/style.css}" rel="stylesheet" media="screen" />
     </head>
     <body>
-        <div class="container long_content" layout:fragment="main_layout">
-            <div class="d-flex justify-content-center my-5">
+        <div class="container" layout:fragment="main_layout">
+            <div class="d-flex justify-content-center mt-5">
                 <form th:action="@{/login}" method="post" th:object="${user}" class="needs-validation" novalidate>
-                    <input type="text" id="login" name="login" placeholder="Enter Login" th:field="*{login}" class="form-control my-2" required>
+                    <input type="text" name="login" placeholder="Enter Login" th:field="*{login}" class="form-control my-2" required>
                     <div class="invalid-feedback">
                         Введите логин!
                       </div>
@@ -19,7 +19,7 @@
                       </div>
                     <div class="d-grid gap-2">
                       <p class="text-danger" th:text="${loginErrorMsg}"></p>
-                      <button type="submit" class="btn btn-warning">Login</button>
+                      <button type="submit" class="btn btn-inverse-orange">Login</button>
                     </div>
                 </form>
             </div>
