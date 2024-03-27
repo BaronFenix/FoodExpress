@@ -1,5 +1,6 @@
 package com.example.FoodExpress.services.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Iterable<Restaurant> getRestaurantsByCuisine(String name) {
+    public List<Restaurant> getRestaurantsByCuisine(String name) {
         return restaurantRepository.findAllByCuisine(name);
     }
 

@@ -1,5 +1,6 @@
 package com.example.FoodExpress.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.example.FoodExpress.models.Cuisine;
@@ -21,7 +22,7 @@ public interface RestaurantService {
 
     public Iterable<Restaurant> getAllRestaurants();
 
-    public Iterable<Restaurant> getRestaurantsByCuisine(String name);
+    public List<Restaurant> getRestaurantsByCuisine(String name);
 
 
 
