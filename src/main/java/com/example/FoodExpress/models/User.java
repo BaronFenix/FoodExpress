@@ -25,7 +25,7 @@ public class User  {
     @Column(nullable = false, length = 30, unique = true)
     private String login;
 
-    @Column(nullable = false, length = 60)
+    @Column(nullable = false, length = 30)
     private String password;
 
     @Column(name = "first_name", nullable = false, length = 30)
@@ -107,6 +107,10 @@ public class User  {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getRoleName() {
+        return this.role.getName();
     }
 
 }
