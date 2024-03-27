@@ -34,6 +34,9 @@ public class Restaurant {
     @Column(name="img_path", nullable = true)
     private String imagePath;
 
+    @Column(name="header_path", nullable = true)
+    private String headerImagePath;
+
     @ManyToMany
     @JoinTable(
         name = "restaurant_cuisines",
@@ -100,6 +103,14 @@ public class Restaurant {
 
     public void setImagePath(String path) {
         this.imagePath = path;
+    }
+
+    public String getHeaderImagePath() {
+        return this.headerImagePath;
+    }
+
+    public void setHeaderImagePath(String headerImagePath) {
+        this.headerImagePath = headerImagePath;
     }
 
 }
